@@ -12,9 +12,9 @@ AsyncWebServer server(80);
 // Create an Event Source on /events
 AsyncEventSource events("/events");
 
-// Timer variables
-unsigned long lastTime = 0;  
-unsigned long timerDelay = 30000;
+//adding timing for delay 
+unsigned long lastTime = 0;
+unsigned long timerDelay = 1000;
 
 float value;
 
@@ -55,7 +55,7 @@ const char index_html[] PROGMEM = R"rawliteral(
     html {font-family: Arial; display: inline-block; text-align: center;}
     p { font-size: 1.2rem;}
     body {  margin: 0;}
-    .topnav { overflow: hidden; background-color: #50B8B4; color: white; font-size: 1rem; }
+    .topnav { overflow: hidden; background-color: #990033; color: white; font-size: 1rem; }
     .content { padding: 20px; }
     .card { background-color: white; box-shadow: 2px 2px 12px 1px rgba(140,140,140,.5); }
     .cards { max-width: 800px; margin: 0 auto; display: grid; grid-gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
@@ -131,7 +131,6 @@ void loop() {
     // Send Events to the Web Server with the Sensor Readings
     events.send("ping",NULL,millis());
     events.send(String(value).c_str(),"Hall Sensor reading",millis());
-    
-    lastTime = millis();
+      lastTime = millis();
   }
 }
